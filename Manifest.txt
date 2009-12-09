@@ -1,0 +1,11 @@
+History.txt
+Manifest.txt
+PostInstall.txt
+README.rdoc
+Rakefile
+lib/em-http-oauth-request.rb
+script/console
+script/destroy
+script/generate
+test/test_em-http-oauth-request.rb
+test/test_helper.rb
