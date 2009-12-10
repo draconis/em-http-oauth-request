@@ -1,5 +1,7 @@
 = em-http-oauth-request
 
+== Description
+
 Allows you to issue requests with the OAuth gem using em-http-request.
 
 The benefit to this is that you can issue asynchronous non-blocking OAuth requests.
