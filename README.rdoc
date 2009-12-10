@@ -1,32 +1,49 @@
 = em-http-oauth-request
 
-* http://github.com/#{github_username}/#{project_name}
+Allows you to issue requests with the OAuth gem using em-http-request.
 
-== DESCRIPTION:
+The benefit to this is that you can issue asynchronous non-blocking OAuth requests.
 
-FIX (describe your package)
+== Installation
 
-== FEATURES/PROBLEMS:
+  sudo gem install em-http-oauth-request
 
-* FIX (list of features or problems)
+== Example
 
-== SYNOPSIS:
+    require 'rubygems'
+    require 'oauth'
+    require 'em-http-oauth-request'
 
-  FIX (code sample of usage)
+    EventMachine.run {
+      consumer = OAuth::Consumer.new('eP1dVdA8jVwBQkE11mGw', 'sq8ywyrwSaxLCQ4tT0UTrOKHAxl649yJu90UgPvrpaI', :site => 'http://twitter.com')
+      atoken = '7719182-DUQbVRJwiBq1cYL28UiyHtzer0HicT5U70W5LWGmi4'
+      asecret = 'Pm6YqsBVl4feVgLizhNoF2vLtxkTLL6JOF7dcN0Q'
+      access_token = OAuth::AccessToken.new(consumer, atoken, asecret)
+  
+      oauth_params = {:consumer => consumer, :token => access_token}
+      req = EventMachine::HttpRequest.new('http://api.twitter.com/1/statuses/home_timeline.json').get
+      oauth_helper = OAuth::Client::Helper.new(req, oauth_params)
+  
+      req.options[:head] = (req.options[:head] || {}).merge!({"Authorization " => [oauth_helper.header]})
+      req.callback {
+        p req.response
 
-== REQUIREMENTS:
+        EventMachine.stop
+      }
+    }
 
-* FIX (list of requirements)
 
-== INSTALL:
+== Issues:
 
-* FIX (sudo gem install, anything else)
+There's currently an issue with em-http-request in which values of 'Authorization' headers are automatically Base64 encoded.  While this is correct for Basic HTTP Authentication, it breaks OAuth requests, which require a number of parameters in the 'Authorization' header.
 
-== LICENSE:
+For the time being, a simple workaround is to add whitespace to the header (for example, 'Authorization ' in the example above).  This works for Twitter's OAuth API, although it may not work for all OAuth providers.
+
+== License:
 
 (The MIT License)
 
-Copyright (c) 2009 FIXME full name
+Copyright (c) 2009 Draconis Software, LLC
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
