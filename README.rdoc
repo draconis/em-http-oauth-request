@@ -15,9 +15,9 @@ The benefit to this is that you can issue asynchronous non-blocking OAuth reques
     require 'em-http-oauth-request'
 
     EventMachine.run {
-      consumer = OAuth::Consumer.new('eP1dVdA8jVwBQkE11mGw', 'sq8ywyrwSaxLCQ4tT0UTrOKHAxl649yJu90UgPvrpaI', :site => 'http://twitter.com')
-      atoken = '7719182-DUQbVRJwiBq1cYL28UiyHtzer0HicT5U70W5LWGmi4'
-      asecret = 'Pm6YqsBVl4feVgLizhNoF2vLtxkTLL6JOF7dcN0Q'
+      consumer = OAuth::Consumer.new('consumer-token', 'consumer-secret', :site => 'http://twitter.com')
+      atoken = 'access-token'
+      asecret = 'access-secret'
       access_token = OAuth::AccessToken.new(consumer, atoken, asecret)
   
       oauth_params = {:consumer => consumer, :token => access_token}
