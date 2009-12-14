@@ -26,7 +26,7 @@ The benefit to this is that you can issue asynchronous non-blocking OAuth reques
       req = EventMachine::HttpRequest.new('http://api.twitter.com/1/statuses/home_timeline.json').get
       oauth_helper = OAuth::Client::Helper.new(req, oauth_params)
   
-      req.options[:head] = (req.options[:head] || {}).merge!({"Authorization" => [oauth_helper.header]})
+      req.options[:head] = (req.options[:head] || {}).merge!({"Authorization" => oauth_helper.header})
       req.callback {
         p req.response
 

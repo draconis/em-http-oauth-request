@@ -16,7 +16,7 @@ module OAuth::RequestProxy::EventMachine
     #   oauth_params = {:consumer => oauth_consumer, :token => access_token}
     #   req = EventMachine::HttpRequest.new(uri).get(options)
     #   oauth_helper = OAuth::Client::Helper.new(req, oauth_params)
-    #   req.options[:head] = (req.options[:head] || {}).merge!({"Authorization" => [oauth_helper.header]})
+    #   req.options[:head] = (req.options[:head] || {}).merge!({"Authorization" => oauth_helper.header})
     #   req.callback {
     #     p req.response
     # 
