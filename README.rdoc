@@ -24,20 +24,13 @@ The benefit to this is that you can issue asynchronous non-blocking OAuth reques
       req = EventMachine::HttpRequest.new('http://api.twitter.com/1/statuses/home_timeline.json').get
       oauth_helper = OAuth::Client::Helper.new(req, oauth_params)
   
-      req.options[:head] = (req.options[:head] || {}).merge!({"Authorization " => [oauth_helper.header]})
+      req.options[:head] = (req.options[:head] || {}).merge!({"Authorization" => [oauth_helper.header]})
       req.callback {
         p req.response
 
         EventMachine.stop
       }
     }
-
-
-== Issues:
-
-There's currently an issue with em-http-request in which values of 'Authorization' headers are automatically Base64 encoded.  While this is correct for Basic HTTP Authentication, it breaks OAuth requests, which require a number of parameters in the 'Authorization' header.
-
-For the time being, a simple workaround is to add whitespace to the header (for example, 'Authorization ' in the example above).  This works for Twitter's OAuth API, although it may not work for all OAuth providers.
 
 == License:
 
