@@ -2,7 +2,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module EmHttpOauthRequest
-  VERSION = '0.0.1'
+  VERSION = '0.1.0'
 end
 
 require 'oauth'
@@ -16,17 +16,13 @@ module OAuth::RequestProxy::EventMachine
     #   oauth_params = {:consumer => oauth_consumer, :token => access_token}
     #   req = EventMachine::HttpRequest.new(uri).get(options)
     #   oauth_helper = OAuth::Client::Helper.new(req, oauth_params)
-    #   req.options[:head] = (req.options[:head] || {}).merge!({"Authorization " => [oauth_helper.header]})
+    #   req.options[:head] = (req.options[:head] || {}).merge!({"Authorization" => [oauth_helper.header]})
     #   req.callback {
     #     p req.response
     # 
     #     EventMachine.stop
     #   }
     # }
-    #
-    # NOTE: currently, em-http-request automatically base64 encodes the 'Authorization' header, which
-    # breaks OAuth.  It appears that making the key of the header 'Authorization ' (note the space)
-    # fixes this for the time being.
     proxies ::EventMachine::HttpClient
     
     def method

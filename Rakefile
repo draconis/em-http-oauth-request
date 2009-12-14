@@ -13,7 +13,7 @@ Hoe.plugin :newgem
 $hoe = Hoe.spec 'em-http-oauth-request' do
   self.developer 'Draconis Software', 'info@draconis.com'
   self.rubyforge_name       = self.name # TODO this is default value
-  self.extra_deps         = [['oauth','>= 0.3.6'], ['em-http-request', '>= 0.2.4']]
+  self.extra_deps         = [['oauth','>= 0.3.6'], ['em-http-request', '>= 0.2.5']]
   self.summary = 'Allows em-http-request to be used for OAuth requests.'
   self.url = 'http://github.com/draconis/em-http-oauth-request'
 end
